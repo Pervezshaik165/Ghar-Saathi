@@ -7,7 +7,7 @@ const connect = async () => {
     return;
   }
   try {
-    await mongoose.connect(uri, {
+    await mongoose.connect(`${uri}/GharSaathi`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
