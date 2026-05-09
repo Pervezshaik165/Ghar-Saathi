@@ -160,5 +160,5 @@ export const CONTACT_INFO = {
   phone: "+91 XXXXX XXXXX",
   email: "gharsaathi38@gmail.com",
   address: "Bangalore, Karnataka, India",
-  website: "www.gharsaathi.com",
+  website: "ghar-saathi.vercel.app",
 };
