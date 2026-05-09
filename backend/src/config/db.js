@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+// Fail fast instead of buffering when DB is unavailable.
+mongoose.set('bufferCommands', false);
+
 const connect = async () => {
   const uri = process.env.MONGO_URI || process.env.MONGODB_URI;
   if (!uri) {
@@ -10,6 +13,8 @@ const connect = async () => {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
     });
     console.log('MongoDB connected');
   } catch (err) {
@@ -19,4 +24,6 @@ const connect = async () => {
   }
 };
 
-module.exports = { connect };
+const isReady = () => mongoose.connection.readyState === 1;
+
+module.exports = { connect, isReady };
