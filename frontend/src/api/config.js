@@ -1,4 +1,7 @@
-export const API_BASE = import.meta.env.VITE_BACKEND_URL || 'https://ghar-saathi.onrender.com';
+const envBase = import.meta.env.VITE_BACKEND_URL;
+const fallbackBase = "https://ghar-saathi.onrender.com";
+
+export const API_BASE = (envBase || fallbackBase).replace(/\/+$/, "");
 
 export function apiUrl(path) {
   // ensure leading slash
