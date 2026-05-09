@@ -4,12 +4,12 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 Development server proxy
 
-The frontend uses a dev proxy to forward `/api` requests to the backend. By default the proxy targets `http://localhost:5000`.
+The frontend uses a dev proxy to forward `/api` requests to the backend. By default the proxy targets https://ghar-saathi.onrender.com.
 To override the backend URL in development or production builds set `VITE_BACKEND_URL`.
 
 Example `.env` in frontend (optional):
 ```
-VITE_BACKEND_URL=http://localhost:5000
+VITE_BACKEND_URL=https://ghar-saathi.onrender.com
 ```
 
 Currently, two official plugins are available:
