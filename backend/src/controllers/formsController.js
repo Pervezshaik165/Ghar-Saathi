@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 const HireRequest = require('../models/HireRequest');
 const BecomeHelper = require('../models/BecomeHelper');
 const QuickInquiry = require('../models/QuickInquiry');
-const { getTransporter } = require('../config/mailer');
+const { sendMail } = require('../config/mailer');
 const db = require('../config/db');
 const { hireTemplate, becomeHelperTemplate, quickInquiryTemplate } = require('../services/emailTemplates');
 
@@ -10,27 +10,19 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'arshisweety009@gmail.com';
 const FROM_EMAIL = process.env.EMAIL_FROM || process.env.SMTP_USER || 'no-reply@ghar-saathi.local';
 
 async function sendEmail(subject, html) {
-  const transporter = getTransporter();
-  if (!transporter) {
-    console.log('No SMTP configured; email not sent. Subject:', subject);
-    console.log(html);
-    return;
-  }
-
   try {
-    const timeoutMs = process.env.SMTP_TIMEOUT_MS ? parseInt(process.env.SMTP_TIMEOUT_MS, 10) : 5000;
-    const info = await Promise.race([
-      transporter.sendMail({
+    const info = await sendMail({
       from: FROM_EMAIL,
       to: ADMIN_EMAIL,
       subject,
       html,
-      }),
-      new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('SMTP timeout')), timeoutMs);
-      }),
-    ]);
-    console.log('Email sent:', info && (info.messageId || info.response || JSON.stringify(info))); 
+    });
+    if (!info) {
+      console.log('No email provider configured; email not sent. Subject:', subject);
+      console.log(html);
+      return;
+    }
+    console.log('Email sent:', info && (info.messageId || info.id || info.response || JSON.stringify(info))); 
   } catch (err) {
     console.error('Failed to send email:', err && err.message ? err.message : err);
   }
