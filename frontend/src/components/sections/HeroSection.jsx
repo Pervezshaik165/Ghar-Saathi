@@ -84,7 +84,7 @@ export const HeroSection = () => {
       <section className="bg-gradient-to-r from-[#08478B] to-[#469838] text-white py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 lg:gap-10 items-center">
           {/* Left Content */}
-          <div className="space-y-6 order-2 md:order-1 max-w-2xl">
+          <div className="space-y-6 max-w-2xl">
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
               Trusted Domestic Helpers for Your Home
             </h1>
@@ -92,7 +92,7 @@ export const HeroSection = () => {
               Gharsaathi Domestic Service provides trained maids, cooks,
               babysitters, elder care helpers, and live-in domestic staff.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col-reverse sm:flex-row gap-4 pt-4">
               <Button
                 variant="ghost"
                 size="md"
@@ -118,7 +118,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Right - Quick Inquiry Form */}
-          <div id="inquiry" className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 text-gray-800 order-1 md:order-2 md:w-[440px] mx-auto md:mx-0">
+          <div id="inquiry" className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 text-gray-800 md:w-[440px] mx-auto md:mx-0">
             <h2 className="text-2xl sm:text-3xl font-bold mb-6">Quick Inquiry</h2>
             <form className="space-y-4" onSubmit={submitQuickInquiry}>
               <input
